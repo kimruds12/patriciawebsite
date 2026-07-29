@@ -20,8 +20,9 @@ export const Contact: React.FC = () => {
   return (
     <section 
       id="contact" 
-      className="scroll-section w-full min-h-dvh flex flex-col justify-between pt-28 px-6 md:px-12 lg:px-24 bg-white"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col justify-between pt-28 px-6 md:px-12 lg:px-24 bg-white"
     >
+
       {/* Contact Content Area */}
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center flex-1 my-auto py-6">
         {/* Left Column: Let's Connect */}

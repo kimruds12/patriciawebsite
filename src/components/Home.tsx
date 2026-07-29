@@ -8,10 +8,11 @@ interface HomeProps {
 
 export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
   return (
-    <section 
-      id="home" 
-      className="scroll-section w-full min-h-dvh flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-bgGradientStart to-bgGradientEnd"
+    <section
+      id="home"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-bgGradientStart to-bgGradientEnd"
     >
+
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto">
         {/* Left Column: Text Content */}
         <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-left">
@@ -21,7 +22,7 @@ export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-textDark font-sans leading-tight">
             Patricia Arlie Miguel
           </h1>
-          
+
           {/* Custom Badges */}
           <div className="flex flex-wrap gap-2.5">
             <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-tertiary/20 text-textDark border border-tertiary/30 font-sans shadow-sm">
@@ -49,11 +50,12 @@ export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
               <ArrowRight size={16} />
             </button>
             <button
-              onClick={() => scrollToSection('about')}
+              onClick={() => scrollToSection('credentials')}
               className="px-6 py-3 rounded-full font-bold text-sm border-2 border-neutral hover:border-primary hover:text-primary transition-all duration-300 hover:scale-105 hover:ring-4 hover:ring-primary/20 focus:ring-4 focus:ring-primary/30 active:scale-95 cursor-pointer text-secondary-dark font-sans"
             >
               View Credentials
             </button>
+
           </div>
         </div>
 
@@ -66,16 +68,16 @@ export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
             {/* Profile Image card wrapped inside the Animated Gradient Border */}
             <div className="relative w-full h-full animated-border-container z-10 shadow-tilted">
               <div className="w-full h-full rounded-xl overflow-hidden bg-white">
-                <img 
-                  src={image1} 
-                  alt="Patricia Arlie Miguel" 
+                <img
+                  src={image1}
+                  alt="Patricia Arlie Miguel"
                   className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-750"
                 />
               </div>
             </div>
 
             {/* Floating Glassmorphism Cards */}
-            
+
             {/* Top Left: 2+ Years Experience */}
             <div className="absolute top-6 -left-8 md:-left-16 z-20 glass-card p-3 rounded-xl flex items-center gap-2.5 animate-float-slow max-w-[160px]">
               <div className="p-2 bg-primary/10 rounded-lg text-primary">

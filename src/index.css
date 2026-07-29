@@ -40,7 +40,7 @@ html, body {
 
 /* RESPONSIVE LAYOUT & SCROLL SNAPPING CONFIGURATION */
 
-/* Desktop viewports (1024px and up): Apply strict CSS snapping */
+/* Desktop viewports (1024px and up): Apply proximity snapping and section top margins for fixed navbar */
 @media (min-width: 1024px) {
   html, body {
     height: 100%;
@@ -49,36 +49,41 @@ html, body {
   .scroll-container {
     height: 100dvh;
     overflow-y: auto;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
   .scroll-section {
-    height: 100dvh;
     min-height: 100dvh;
+    height: auto;
     scroll-snap-align: start;
-    scroll-snap-stop: always;
+    scroll-margin-top: 5rem;
     position: relative;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
 }
 
+
 /* Mobile & Tablet viewports (under 1024px): Standard scroll flow, no snapping */
 @media (max-width: 1023px) {
   html, body {
+    overflow-x: hidden !important;
     overflow-y: auto !important;
     height: auto !important;
+    min-height: 100% !important;
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
   }
   .scroll-container {
     height: auto !important;
+    min-height: 100% !important;
     overflow-y: visible !important;
     scroll-snap-type: none !important;
   }
   .scroll-section {
     height: auto !important;
-    min-height: 100dvh;
+    min-height: 100dvh !important;
     scroll-snap-align: none !important;
     padding-top: 6.5rem !important; /* Spacious padding for fixed header */
     padding-bottom: 3.5rem !important;
@@ -87,6 +92,7 @@ html, body {
     flex-direction: column;
   }
 }
+
 
 /* Scrollbar styling */
 .scroll-container::-webkit-scrollbar {
@@ -153,18 +159,24 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(226, 147, 129, 0.4), 0 0 40px rgba(232, 195, 162, 0.2); }
+  50% { box-shadow: 0 0 35px rgba(226, 147, 129, 0.7), 0 0 55px rgba(232, 195, 162, 0.4); }
+}
+
 .animated-border-container {
   position: relative;
-  padding: 5px; /* Border outline gap */
-  border-radius: 1.25rem;
-  background: linear-gradient(270deg, var(--color-primary), var(--color-tertiary), var(--color-primary-light));
-  background-size: 200% 200%;
-  animation: rotate-gradient 6s linear infinite;
+  padding: 4px;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #E29381, #E8C3A2, #C86E5B, #F5C1B5, #E29381);
+  background-size: 300% 300%;
+  animation: rotate-gradient 5s ease infinite, pulse-glow 3s ease-in-out infinite;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .animated-border-container:hover {
-  animation-duration: 3s;
-  box-shadow: 0 0 25px rgba(226, 147, 129, 0.55);
-  transform: scale(1.02);
+  animation-duration: 2.5s, 1.5s;
+  transform: scale(1.03);
+  box-shadow: 0 0 40px rgba(226, 147, 129, 0.8), 0 0 60px rgba(232, 195, 162, 0.6);
 }
+

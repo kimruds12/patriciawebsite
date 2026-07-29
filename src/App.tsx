@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Home } from './components/Home';
 import { About } from './components/About';
 import { Skills } from './components/Skills';
+import { Credentials } from './components/Credentials';
 import { Contact } from './components/Contact';
 import { ArrowUp } from 'lucide-react';
 
@@ -21,30 +22,33 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (containerRef.current) {
-        // Show scroll-to-top button after scrolling past 300px
-        setShowScrollTop(containerRef.current.scrollTop > 300);
-      }
+      const scrollPos = window.innerWidth >= 1024 
+        ? containerRef.current?.scrollTop || 0
+        : window.scrollY;
+      setShowScrollTop(scrollPos > 300);
     };
 
     const container = containerRef.current;
     if (container) {
       container.addEventListener('scroll', handleScroll);
     }
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       if (container) {
         container.removeEventListener('scroll', handleScroll);
       }
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   useEffect(() => {
-    const sections = ['home', 'about', 'skills', 'contact'];
+    const sections = ['home', 'about', 'skills', 'credentials', 'contact'];
+    const isDesktop = window.innerWidth >= 1024;
     
     const options = {
-      root: containerRef.current, // Target scroll tracking inside container
-      rootMargin: '-30% 0px -30% 0px', // Trigger activation in middle of view
+      root: isDesktop ? containerRef.current : null,
+      rootMargin: isDesktop ? '-30% 0px -30% 0px' : '-20% 0px -20% 0px',
       threshold: 0
     };
 
@@ -65,7 +69,7 @@ function App() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-bgLight select-none">
+    <div className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-bgLight">
       {/* Fixed top Navbar Header */}
       <Header activeSection={activeSection} scrollToSection={scrollToSection} />
       
@@ -77,8 +81,11 @@ function App() {
         <Home scrollToSection={scrollToSection} />
         <About />
         <Skills />
+        <Credentials />
         <Contact />
       </div>
+
+
 
       {/* Floating Interactive Scroll-To-Top Pop-up Button */}
       <button
