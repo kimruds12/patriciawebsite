@@ -1,0 +1,170 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@theme {
+  --color-primary: #E29381;
+  --color-primary-light: #F5C1B5;
+  --color-primary-dark: #C86E5B;
+  --color-secondary: #A39397;
+  --color-secondary-light: #C4B9BB;
+  --color-secondary-dark: #7D6D70;
+  --color-tertiary: #E8C3A2;
+  --color-tertiary-light: #F3DEC9;
+  --color-tertiary-dark: #CC9D74;
+  --color-neutral: #959899;
+  --color-neutral-light: #BEBFC0;
+  --color-neutral-dark: #6E7071;
+  
+  --color-text-dark: #1A1A1A;
+  --color-bg-light: #FAFAFA;
+  
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  
+  --shadow-premium: 0 12px 40px -12px rgba(0, 0, 0, 0.04);
+  --shadow-glass: 0 8px 32px 0 rgba(149, 152, 153, 0.12);
+  --shadow-tilted: 15px 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* Custom Base Styles */
+html, body {
+  font-family: var(--font-sans);
+  color: var(--color-text-dark);
+  background-color: var(--color-bg-light);
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+/* RESPONSIVE LAYOUT & SCROLL SNAPPING CONFIGURATION */
+
+/* Desktop viewports (1024px and up): Apply strict CSS snapping */
+@media (min-width: 1024px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  .scroll-container {
+    height: 100dvh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scroll-section {
+    height: 100dvh;
+    min-height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Mobile & Tablet viewports (under 1024px): Standard scroll flow, no snapping */
+@media (max-width: 1023px) {
+  html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+  }
+  .scroll-container {
+    height: auto !important;
+    overflow-y: visible !important;
+    scroll-snap-type: none !important;
+  }
+  .scroll-section {
+    height: auto !important;
+    min-height: 100dvh;
+    scroll-snap-align: none !important;
+    padding-top: 6.5rem !important; /* Spacious padding for fixed header */
+    padding-bottom: 3.5rem !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Scrollbar styling */
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background: rgba(250, 250, 250, 0.8);
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #A39397;
+  border-radius: 4px;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #E29381;
+}
+
+/* Glassmorphism card effects */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-glass);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 40px 0 rgba(149, 152, 153, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Backdrop blur for Header */
+.glass-header {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* PORTRAIT ANIMATED STATIC BORDER */
+@keyframes rotate-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-border-container {
+  position: relative;
+  padding: 5px; /* Border outline gap */
+  border-radius: 1.25rem;
+  background: linear-gradient(270deg, var(--color-primary), var(--color-tertiary), var(--color-primary-light));
+  background-size: 200% 200%;
+  animation: rotate-gradient 6s linear infinite;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animated-border-container:hover {
+  animation-duration: 3s;
+  box-shadow: 0 0 25px rgba(226, 147, 129, 0.55);
+  transform: scale(1.02);
+}

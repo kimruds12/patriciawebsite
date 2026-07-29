@@ -1,20 +1,31 @@
 {
   "name": "patriciawebsite",
-  "version": "1.0.0",
-  "description": "personal website",
-  "homepage": "https://github.com/kimruds12/patriciawebsite#readme",
-  "bugs": {
-    "url": "https://github.com/kimruds12/patriciawebsite/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kimruds12/patriciawebsite.git"
-  },
-  "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^0.400.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "autoprefixer": "^10.5.4",
+    "oxlint": "^1.71.0",
+    "pdfkit": "^0.19.1",
+    "postcss": "^8.5.24",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1"
   }
 }
