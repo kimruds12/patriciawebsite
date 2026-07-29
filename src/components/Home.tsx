@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Briefcase, Layers, Award } from 'lucide-react';
+import { ArrowRight, Layers, Award } from 'lucide-react';
 import image1 from '../assets/image1.jpg';
 
 interface HomeProps {

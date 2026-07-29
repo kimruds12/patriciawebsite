@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send, Linkedin, Facebook, Loader2 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
+import { Mail, Send, Linkedin, Facebook, Loader2 } from 'lucide-react';
+
 import { Footer } from './Footer';
 
 export const Contact: React.FC = () => {
@@ -15,21 +15,29 @@ export const Contact: React.FC = () => {
     setLoading(true);
 
     try {
-      // Send email notification using EmailJS
-      await emailjs.send(
-        'default_service',
-        'template_contact',
-        {
-          from_name: form.name,
-          from_email: form.email,
-          to_email: 'patriciaarliemiguel08@gmail.com',
-          message: form.message,
+      // Send email via Formsubmit.co (zero-config, emails go directly to Gmail)
+      const response = await fetch('https://formsubmit.co/ajax/patriciaarliemiguel08@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        'PUBLIC_KEY_PLACEHOLDER'
-      );
-      setSubmitted(true);
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: `Portfolio Contact from ${form.name}`,
+          _template: 'table',
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        throw new Error('Failed to send');
+      }
     } catch {
-      // Direct mailto fallback link to ensure client receives the message at patriciaarliemiguel08@gmail.com
+      // Fallback: open mailto link so the message still gets through
       const mailtoUrl = `mailto:patriciaarliemiguel08@gmail.com?subject=${encodeURIComponent(
         'Portfolio Contact from ' + form.name
       )}&body=${encodeURIComponent(
