@@ -48,9 +48,6 @@ export const Skills: React.FC = () => {
       <div className="max-w-7xl w-full flex flex-col items-center h-full relative my-auto">
         {/* Title */}
         <div className="text-center mb-8 lg:mb-12 z-10">
-          <span className="text-xs font-extrabold tracking-widest text-primary uppercase font-sans">
-            EXPERT SERVICES
-          </span>
           <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-textDark font-sans mt-2">
             My Expertise
           </h2>

@@ -38,13 +38,25 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }
     <>
       <header className="fixed top-0 left-0 right-0 z-40 transition-all duration-300 glass-header">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* Logo */}
-          <button 
-            onClick={() => handleNavClick('home')}
-            className="text-2xl font-bold tracking-tight text-primary transition-transform hover:scale-105 active:scale-95 cursor-pointer font-sans hover:ring-4 hover:ring-primary/10 rounded-lg px-2 py-1"
-          >
-            PATRICIA<span className="text-secondary font-medium">.DEV</span>
-          </button>
+          {/* Left: Mobile Hamburger Button & Logo */}
+          <div className="flex items-center gap-3">
+            {/* Mobile Hamburger Button on Upper Left */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="md:hidden p-2 text-secondary-dark hover:text-primary hover:bg-primary/10 rounded-full transition-colors cursor-pointer"
+              aria-label="Open Navigation Menu"
+            >
+              <Menu size={24} />
+            </button>
+
+            {/* Logo */}
+            <button 
+              onClick={() => handleNavClick('home')}
+              className="text-2xl font-bold tracking-tight text-primary transition-transform hover:scale-105 active:scale-95 cursor-pointer font-sans hover:ring-4 hover:ring-primary/10 rounded-lg px-2 py-1"
+            >
+              PATRICIA<span className="text-secondary font-medium">.DEV</span>
+            </button>
+          </div>
 
           {/* Center Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -64,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }
             ))}
           </nav>
 
-          {/* Right CTA Button (Highlight on hover) */}
+          {/* Right CTA Button */}
           <div className="hidden md:flex items-center">
             <a
               href="/Patricia_Arlie_Miguel_Resume.pdf"
@@ -75,29 +87,20 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, scrollToSection }
               Download Resume
             </a>
           </div>
-
-          {/* Mobile Hamburger Button */}
-          <button
-            onClick={() => setIsOpen(true)}
-            className="md:hidden p-2.5 text-secondary-dark hover:text-primary hover:bg-primary/10 rounded-full transition-colors cursor-pointer"
-            aria-label="Open Navigation Menu"
-          >
-            <Menu size={24} />
-          </button>
         </div>
       </header>
 
-      {/* Side-Drawer Backdrop & Panel (Mobile & Tablet) */}
+      {/* Side-Drawer Backdrop & Panel opening from the UPPER LEFT */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 z-50 flex justify-end">
+        <div className="md:hidden fixed inset-0 z-50 flex justify-start">
           {/* Dark Blur Backdrop Overlay */}
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 animate-fade-in"
             onClick={() => setIsOpen(false)}
           />
 
-          {/* Slide-In Side Drawer Container (Exact design matching image 5) */}
-          <div className="relative w-[280px] sm:w-[320px] max-w-[85vw] h-full bg-[#181617] text-white p-6 shadow-2xl flex flex-col justify-between z-10 border-l border-white/10 animate-fade-in">
+          {/* Slide-In Side Drawer Container on Upper Left (matching Image 5 exact styling) */}
+          <div className="relative w-[280px] sm:w-[320px] max-w-[85vw] h-full bg-[#181617] text-white p-6 shadow-2xl flex flex-col justify-between z-10 border-r border-white/10 animate-fade-in">
             
             {/* Top Bar: NAVIGATION Title on Upper Left & Close Button on Upper Right */}
             <div>

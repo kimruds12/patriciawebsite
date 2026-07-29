@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, ExternalLink, X, Download, Eye } from 'lucide-react';
 
-
 import sapImg from '../assets/Sapbusiness1.png';
 import metrobankImg from '../assets/metrobank.png';
 import patriciaImg from '../assets/patricia.png';
@@ -33,57 +32,57 @@ export const Credentials: React.FC = () => {
   const credentialsList: CredentialItem[] = [
     {
       id: 'sap-business-one',
-      title: 'SAP Business One Certification',
-      badge: 'ERP CERTIFICATION',
-      details: 'SAP Business One — Logistics & Financials Enterprise Software',
+      title: 'SAP Business One',
+      badge: 'SAP CERTIFICATION',
+      details: 'This certificate demonstrates my foundational knowledge of SAP Business One, an Enterprise Resource Planning (ERP) system used to streamline business operations. Through this training, I gained an understanding of business processes such as inventory management, purchasing, sales, financial management, and reporting, which are essential in supporting organizational efficiency and decision-making.',
       image: sapImg,
       pdf: sapPdf,
     },
     {
       id: 'metrobank-seminar',
-      title: 'Metrobank Seminar Certificate',
-      badge: 'CYBERSECURITY',
-      details: 'Think Before You Click: A Hybrid Seminar on Preventing Social Engineering Attacks',
+      title: 'Metrobank Seminar Certificate – Think Before You Click: A Hybrid Seminar on Preventing Social Engineering Attacks',
+      badge: 'SEMINAR CERTIFICATE',
+      details: 'This seminar enhanced my awareness of cybersecurity and the importance of protecting sensitive information from social engineering attacks. I learned how to identify common cyber threats, such as phishing and online scams, and apply safe digital practices to minimize security risks in both personal and professional settings.',
       image: metrobankImg,
       pdf: metrobankPdf,
     },
     {
       id: 'patricia-fgd',
-      title: 'Patricia Arlie D. Miguel FGD Certificate',
-      badge: 'FGD CERTIFICATE',
-      details: 'MOVING ON : HOPING FOR THE END OF THE PANDEMIC',
+      title: 'MOVING ON: HOPING FOR THE END OF THE PANDEMIC',
+      badge: 'SEMINAR CERTIFICATE',
+      details: 'This seminar provided valuable insights into the challenges and lessons brought about by the COVID-19 pandemic. It emphasized resilience, adaptability, and the importance of maintaining a positive outlook while preparing for a safer and more productive future in both personal and professional environments.',
       image: patriciaImg,
       pdf: patriciaPdf,
     },
     {
       id: 'create-sustainability',
-      title: 'Workplace Policies & Sustainability',
-      badge: 'PACE CERTIFICATE',
-      details: 'Create Workplace Policies and Procedures for Sustainability',
+      title: 'Eversity – Create Workplace Policies and Procedures for Sustainability',
+      badge: 'EVERSITY CERTIFICATE',
+      details: 'This course strengthened my understanding of workplace sustainability by introducing strategies for creating effective environmental policies and procedures. It emphasized the importance of responsible resource management and sustainable practices that contribute to long-term organizational success.',
       image: createImg,
       pdf: createPdf,
     },
     {
       id: 'continuous-improvement',
-      title: 'Continuous Improvement Management',
-      badge: 'PACE CERTIFICATE',
-      details: 'Continuous Improvement Management Certification',
+      title: 'Eversity – Continuous Improvement Management',
+      badge: 'EVERSITY CERTIFICATE',
+      details: 'This certificate reflects my understanding of continuous improvement principles and their role in enhancing organizational performance. I learned how to identify opportunities for improvement, analyze processes, and implement strategies that promote efficiency, productivity, and quality.',
       image: continuousImg,
       pdf: continuousPdf,
     },
     {
       id: 'international-forecasting',
-      title: 'International Market & Forecasting',
-      badge: 'PACE CERTIFICATE',
-      details: 'International Market and Business Forecasting',
+      title: 'Eversity – International Market and Business Forecasting',
+      badge: 'EVERSITY CERTIFICATE',
+      details: 'Through this course, I developed a better understanding of global market trends and business forecasting techniques. It enhanced my ability to analyze market conditions, evaluate business opportunities, and make informed decisions using forecasting methods and economic insights.',
       image: internationalImg,
       pdf: internationalPdf,
     },
     {
       id: 'critical-thinking',
-      title: 'Critical Thinking & Emotional Intelligence',
-      badge: 'PACE CERTIFICATE',
-      details: 'Build Critical Thinking in Others with Emotional Intelligence',
+      title: 'Eversity – Build Critical Thinking in Others with Emotional Intelligence',
+      badge: 'EVERSITY CERTIFICATE',
+      details: 'This course emphasized the value of combining emotional intelligence with critical thinking to improve communication, collaboration, and decision-making. It equipped me with strategies to encourage analytical thinking, build stronger relationships, and contribute effectively in team environments.',
       image: buildImg,
       pdf: buildPdf,
     },
@@ -152,7 +151,7 @@ export const Credentials: React.FC = () => {
                   <h3 className="text-base font-extrabold text-textDark leading-snug group-hover:text-primary transition-colors font-sans">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-secondary-dark leading-relaxed font-sans mt-2 line-clamp-3">
+                  <p className="text-xs text-secondary-dark leading-relaxed font-sans mt-2 line-clamp-4">
                     {item.details}
                   </p>
                 </div>
@@ -178,20 +177,20 @@ export const Credentials: React.FC = () => {
             {/* Modal Header */}
             <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/80">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-primary/10 text-primary rounded-xl">
+                <div className="p-2 bg-primary/10 text-primary rounded-xl flex-shrink-0">
                   <FileText size={20} />
                 </div>
-                <div>
-                  <h3 className="text-sm md:text-base font-bold text-textDark font-sans">
+                <div className="text-left">
+                  <h3 className="text-sm md:text-base font-bold text-textDark font-sans line-clamp-1">
                     {selectedPdf.title}
                   </h3>
-                  <p className="text-xs text-secondary-dark font-sans hidden sm:block">
+                  <p className="text-xs text-secondary-dark font-sans hidden sm:block line-clamp-1">
                     {selectedPdf.details}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-shrink-0">
                 <a
                   href={selectedPdf.pdf}
                   target="_blank"

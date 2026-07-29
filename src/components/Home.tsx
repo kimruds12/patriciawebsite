@@ -26,7 +26,7 @@ export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
           {/* Custom Badges */}
           <div className="flex flex-wrap gap-2.5">
             <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-tertiary/20 text-textDark border border-tertiary/30 font-sans shadow-sm">
-              Financial Support Specialist
+              Financial Support
             </span>
             <span className="px-4 py-1.5 rounded-full text-xs font-bold bg-neutral/15 text-textDark border border-neutral/20 font-sans shadow-sm">
               SAP Business One ERP
@@ -77,17 +77,6 @@ export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
             </div>
 
             {/* Floating Glassmorphism Cards */}
-
-            {/* Top Left: 2+ Years Experience */}
-            <div className="absolute top-6 -left-8 md:-left-16 z-20 glass-card p-3 rounded-xl flex items-center gap-2.5 animate-float-slow max-w-[160px]">
-              <div className="p-2 bg-primary/10 rounded-lg text-primary">
-                <Briefcase size={16} />
-              </div>
-              <div className="text-left">
-                <p className="text-[11px] font-extrabold text-primary uppercase tracking-wider leading-none">Experience</p>
-                <p className="text-xs font-bold text-textDark leading-tight mt-0.5">2+ Years Exp.</p>
-              </div>
-            </div>
 
             {/* Top Right: SAP Business One (Tiny Tag) */}
             <div className="absolute -top-4 right-6 z-20 glass-card px-3.5 py-1.5 rounded-full animate-float-medium">
