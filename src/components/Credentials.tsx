@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FileText, ExternalLink, X, Download, Eye } from 'lucide-react';
+import React from 'react';
+import { FileText, Eye } from 'lucide-react';
 
 import sapImg from '../assets/Sapbusiness1.png';
 import metrobankImg from '../assets/metrobank.png';
@@ -29,7 +29,6 @@ interface CredentialItem {
 }
 
 export const Credentials: React.FC = () => {
-  const [selectedItem, setSelectedItem] = useState<CredentialItem | null>(null);
 
   const credentialsList: CredentialItem[] = [
     {
@@ -106,22 +105,6 @@ export const Credentials: React.FC = () => {
     },
   ];
 
-  // Prevent background body scroll when modal is open
-  // Uses a CSS class that can override the mobile !important scroll rules
-  useEffect(() => {
-    if (selectedItem) {
-      document.body.classList.add('modal-open');
-      document.documentElement.classList.add('modal-open');
-    } else {
-      document.body.classList.remove('modal-open');
-      document.documentElement.classList.remove('modal-open');
-    }
-    return () => {
-      document.body.classList.remove('modal-open');
-      document.documentElement.classList.remove('modal-open');
-    };
-  }, [selectedItem]);
-
   return (
     <section
       id="credentials"
@@ -129,7 +112,7 @@ export const Credentials: React.FC = () => {
     >
       <div className="max-w-7xl w-full flex flex-col items-start py-2">
 
-        {/* Header Title Section (matching Picture 1 format) */}
+        {/* Header Title Section */}
         <div className="text-left w-full mb-10 z-10">
           <span className="text-xs font-extrabold tracking-[0.25em] text-primary uppercase font-sans flex items-center gap-2">
             FEATURED WORK
@@ -138,7 +121,7 @@ export const Credentials: React.FC = () => {
             Recent Credentials
           </h2>
           <p className="text-sm md:text-base text-secondary-dark font-sans max-w-2xl mt-2 leading-relaxed">
-            A compilation of my most recent certificates, works and achievements. Click on any credential below to view the official PDF document.
+            A compilation of my most recent certificates, works and achievements. Click on any credential below to view the official document.
           </p>
         </div>
 
@@ -162,7 +145,7 @@ export const Credentials: React.FC = () => {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                   <span className="text-white text-xs font-bold font-sans flex items-center gap-1.5">
-                    <Eye size={14} /> Click View Certificate to inspect PDF
+                    <Eye size={14} /> Click to view certificate
                   </span>
                 </div>
               </div>
@@ -178,104 +161,21 @@ export const Credentials: React.FC = () => {
                   </p>
                 </div>
 
-                {/* View Certificate Button */}
-                <button
-                  onClick={() => setSelectedItem(item)}
+                {/* View Certificate — opens file directly in new tab */}
+                <a
+                  href={item.fileSource}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold text-xs py-3 px-4 rounded-xl border border-primary/20 hover:border-primary transition-all duration-300 shadow-sm active:scale-95 cursor-pointer font-sans"
                 >
                   <FileText size={15} />
                   View Certificate
-                </button>
+                </a>
               </div>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Certificate View Modal Overlay */}
-      {selectedItem && (
-        <div
-          className="fixed inset-0 z-[9999] bg-black/65 backdrop-blur-sm flex items-center justify-center p-3 md:p-6 animate-fade-in"
-          onClick={(e) => { if (e.target === e.currentTarget) setSelectedItem(null); }}
-          style={{ touchAction: 'none' }}
-        >
-          <div
-            className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/40"
-            style={{ maxHeight: '90dvh' } as React.CSSProperties}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/80 flex-shrink-0">
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="p-2 bg-primary/10 text-primary rounded-xl flex-shrink-0">
-                  <FileText size={18} />
-                </div>
-                <div className="text-left min-w-0 flex-1">
-                  <h3 className="text-sm md:text-base font-bold text-textDark font-sans truncate">
-                    {selectedItem.title}
-                  </h3>
-                  <p className="text-xs text-secondary-dark font-sans hidden sm:block truncate">
-                    {selectedItem.details}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 flex-shrink-0 ml-2">
-                <a
-                  href={selectedItem.fileSource}
-                  download={selectedItem.fileType === 'image' ? `${selectedItem.title}.jpg` : true}
-                  className="flex items-center gap-1.5 bg-primary hover:bg-primary-dark text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm font-sans"
-                >
-                  <Download size={14} />
-                  <span className="hidden sm:inline">Download</span>
-                </a>
-                <button
-                  onClick={() => setSelectedItem(null)}
-                  className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-200/60 rounded-xl transition-colors cursor-pointer"
-                  title="Close viewer"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-            </div>
-
-            {/* Modal Viewer Body */}
-            <div className="flex-1 w-full bg-slate-100 overflow-auto flex items-center justify-center" style={{ minHeight: '300px' }}>
-              {selectedItem.fileType === 'pdf' ? (
-                <object
-                  data={selectedItem.fileSource}
-                  type="application/pdf"
-                  className="w-full h-full"
-                  style={{ minHeight: '400px' }}
-                >
-                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4">
-                    <p className="text-sm text-secondary-dark font-sans">
-                      Your browser does not support inline PDF viewing. You can view or download the certificate below:
-                    </p>
-                    <a
-                      href={selectedItem.fileSource}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs font-sans shadow-md"
-                    >
-                      <ExternalLink size={16} /> Open PDF in New Tab
-                    </a>
-                  </div>
-                </object>
-              ) : (
-                <div className="w-full h-full flex items-center justify-center p-4 overflow-auto">
-                  <img
-                    src={selectedItem.fileSource}
-                    alt={selectedItem.title}
-                    className="max-w-full object-contain rounded-lg shadow-sm"
-                    style={{ maxHeight: 'calc(90dvh - 80px)' }}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };
