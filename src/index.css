@@ -34,6 +34,10 @@ html, body {
   padding: 0;
 }
 
+:root {
+  --header-offset: 5rem; /* matches header height (h-20) */
+}
+
 #root {
   height: 100%;
 }
@@ -67,6 +71,16 @@ html, body {
 /* Ensure anchors and direct hash links are offset from the fixed header on all viewports */
 .scroll-section {
   scroll-margin-top: 5rem; /* matches header height */
+}
+
+/* Anchor offset shim: prevents browser auto-jump from being covered by fixed header */
+.scroll-section[id]::before {
+  content: "";
+  display: block;
+  height: var(--header-offset);
+  margin-top: calc(-1 * var(--header-offset));
+  visibility: hidden;
+  pointer-events: none;
 }
 
 
