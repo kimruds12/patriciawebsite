@@ -29,7 +29,7 @@ export const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="scroll-section scroll-mt-20 w-full min-h-dvh flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-white"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-transparent"
     >
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center my-auto">
         {/* Left Column: Tilted Profile Image Card wrapped in Animated Border */}
@@ -73,7 +73,7 @@ export const About: React.FC = () => {
             {details.map((detail, index) => (
               <div
                 key={index}
-                className="flex items-center gap-4 bg-bgGradientEnd/60 p-4 rounded-xl border border-gray-100 hover:border-primary-light/50 transition-colors shadow-premium"
+                className="flex items-center gap-4 bg-white/95 p-5 rounded-3xl border border-gray-200 shadow-md transition-all hover:border-primary/30"
               >
                 <div className="p-2.5 bg-white rounded-lg shadow-sm flex-shrink-0">
                   {detail.icon}

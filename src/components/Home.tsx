@@ -10,7 +10,7 @@ export const Home: React.FC<HomeProps> = ({ scrollToSection }) => {
   return (
     <section
       id="home"
-      className="scroll-section scroll-mt-20 w-full min-h-dvh flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-bgGradientStart to-bgGradientEnd"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-transparent"
     >
 
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center my-auto">

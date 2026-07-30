@@ -8,6 +8,7 @@ import createImg from '../assets/create.png';
 import continuousImg from '../assets/continuous.png';
 import internationalImg from '../assets/international.png';
 import buildImg from '../assets/build.png';
+import patdeanlistImg from '../assets/patdeanlist.jpg';
 
 import sapPdf from '../assets/SAP BUSINESS ONE.pdf';
 import metrobankPdf from '../assets/Metrobank Seminar Certificate.pdf';
@@ -23,11 +24,12 @@ interface CredentialItem {
   badge: string;
   details: string;
   image: string;
-  pdf: string;
+  fileSource: string;
+  fileType: 'pdf' | 'image';
 }
 
 export const Credentials: React.FC = () => {
-  const [selectedPdf, setSelectedPdf] = useState<CredentialItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<CredentialItem | null>(null);
 
   const credentialsList: CredentialItem[] = [
     {
@@ -36,7 +38,8 @@ export const Credentials: React.FC = () => {
       badge: 'SAP CERTIFICATION',
       details: 'This certificate demonstrates my foundational knowledge of SAP Business One, an Enterprise Resource Planning (ERP) system used to streamline business operations. Through this training, I gained an understanding of business processes such as inventory management, purchasing, sales, financial management, and reporting, which are essential in supporting organizational efficiency and decision-making.',
       image: sapImg,
-      pdf: sapPdf,
+      fileSource: sapPdf,
+      fileType: 'pdf',
     },
     {
       id: 'metrobank-seminar',
@@ -44,7 +47,8 @@ export const Credentials: React.FC = () => {
       badge: 'SEMINAR CERTIFICATE',
       details: 'This seminar enhanced my awareness of cybersecurity and the importance of protecting sensitive information from social engineering attacks. I learned how to identify common cyber threats, such as phishing and online scams, and apply safe digital practices to minimize security risks in both personal and professional settings.',
       image: metrobankImg,
-      pdf: metrobankPdf,
+      fileSource: metrobankPdf,
+      fileType: 'pdf',
     },
     {
       id: 'patricia-fgd',
@@ -52,7 +56,8 @@ export const Credentials: React.FC = () => {
       badge: 'SEMINAR CERTIFICATE',
       details: 'This seminar provided valuable insights into the challenges and lessons brought about by the COVID-19 pandemic. It emphasized resilience, adaptability, and the importance of maintaining a positive outlook while preparing for a safer and more productive future in both personal and professional environments.',
       image: patriciaImg,
-      pdf: patriciaPdf,
+      fileSource: patriciaPdf,
+      fileType: 'pdf',
     },
     {
       id: 'create-sustainability',
@@ -60,7 +65,8 @@ export const Credentials: React.FC = () => {
       badge: 'EVERSITY CERTIFICATE',
       details: 'This course strengthened my understanding of workplace sustainability by introducing strategies for creating effective environmental policies and procedures. It emphasized the importance of responsible resource management and sustainable practices that contribute to long-term organizational success.',
       image: createImg,
-      pdf: createPdf,
+      fileSource: createPdf,
+      fileType: 'pdf',
     },
     {
       id: 'continuous-improvement',
@@ -68,7 +74,8 @@ export const Credentials: React.FC = () => {
       badge: 'EVERSITY CERTIFICATE',
       details: 'This certificate reflects my understanding of continuous improvement principles and their role in enhancing organizational performance. I learned how to identify opportunities for improvement, analyze processes, and implement strategies that promote efficiency, productivity, and quality.',
       image: continuousImg,
-      pdf: continuousPdf,
+      fileSource: continuousPdf,
+      fileType: 'pdf',
     },
     {
       id: 'international-forecasting',
@@ -76,7 +83,8 @@ export const Credentials: React.FC = () => {
       badge: 'EVERSITY CERTIFICATE',
       details: 'Through this course, I developed a better understanding of global market trends and business forecasting techniques. It enhanced my ability to analyze market conditions, evaluate business opportunities, and make informed decisions using forecasting methods and economic insights.',
       image: internationalImg,
-      pdf: internationalPdf,
+      fileSource: internationalPdf,
+      fileType: 'pdf',
     },
     {
       id: 'critical-thinking',
@@ -84,13 +92,23 @@ export const Credentials: React.FC = () => {
       badge: 'EVERSITY CERTIFICATE',
       details: 'This course emphasized the value of combining emotional intelligence with critical thinking to improve communication, collaboration, and decision-making. It equipped me with strategies to encourage analytical thinking, build stronger relationships, and contribute effectively in team environments.',
       image: buildImg,
-      pdf: buildPdf,
+      fileSource: buildPdf,
+      fileType: 'pdf',
+    },
+    {
+      id: 'deanlist-certificate',
+      title: "Patricia – Dean's Lister Certificate",
+      badge: "DEAN'S LISTER",
+      details: 'This certificate honors my academic excellence and Dean’s List achievement, highlighting my dedication, consistent performance, and strong discipline in both studies and project work.',
+      image: patdeanlistImg,
+      fileSource: patdeanlistImg,
+      fileType: 'image',
     },
   ];
 
   // Prevent background body scroll when modal is open
   useEffect(() => {
-    if (selectedPdf) {
+    if (selectedItem) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -98,12 +116,12 @@ export const Credentials: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [selectedPdf]);
+  }, [selectedItem]);
 
   return (
     <section
       id="credentials"
-      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col items-center justify-start pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-gradient-to-br from-bgGradientStart to-bgGradientEnd"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col items-center justify-start pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-transparent"
     >
       <div className="max-w-7xl w-full flex flex-col items-start py-2">
 
@@ -158,7 +176,7 @@ export const Credentials: React.FC = () => {
 
                 {/* View Certificate Button */}
                 <button
-                  onClick={() => setSelectedPdf(item)}
+                  onClick={() => setSelectedItem(item)}
                   className="w-full flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary text-primary hover:text-white font-bold text-xs py-3 px-4 rounded-xl border border-primary/20 hover:border-primary transition-all duration-300 shadow-sm active:scale-95 cursor-pointer font-sans"
                 >
                   <FileText size={15} />
@@ -171,7 +189,7 @@ export const Credentials: React.FC = () => {
       </div>
 
       {/* PDF View Modal Overlay */}
-      {selectedPdf && (
+      {selectedItem && (
         <div className="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm flex items-center justify-center p-4 md:p-6 animate-fade-in">
           <div className="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/40">
             {/* Modal Header */}
@@ -182,17 +200,17 @@ export const Credentials: React.FC = () => {
                 </div>
                 <div className="text-left">
                   <h3 className="text-sm md:text-base font-bold text-textDark font-sans line-clamp-1">
-                    {selectedPdf.title}
+                    {selectedItem.title}
                   </h3>
                   <p className="text-xs text-secondary-dark font-sans hidden sm:block line-clamp-1">
-                    {selectedPdf.details}
+                    {selectedItem.details}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 flex-shrink-0">
                 <a
-                  href={selectedPdf.pdf}
+                  href={selectedItem.fileSource}
                   target="_blank"
                   rel="noopener noreferrer"
                   download
@@ -202,7 +220,7 @@ export const Credentials: React.FC = () => {
                   <span className="hidden sm:inline">Download</span>
                 </a>
                 <button
-                  onClick={() => setSelectedPdf(null)}
+                  onClick={() => setSelectedItem(null)}
                   className="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-200/60 rounded-xl transition-colors cursor-pointer"
                   title="Close viewer"
                 >
@@ -211,27 +229,35 @@ export const Credentials: React.FC = () => {
               </div>
             </div>
 
-            {/* Modal PDF Viewer Body */}
-            <div className="flex-1 w-full bg-slate-100 relative min-h-[400px] md:min-h-[550px] overflow-hidden">
-              <object
-                data={selectedPdf.pdf}
-                type="application/pdf"
-                className="w-full h-full min-h-[400px] md:min-h-[550px]"
-              >
-                <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4">
-                  <p className="text-sm text-secondary-dark font-sans">
-                    Your browser does not support inline PDF viewing. You can view or download the certificate below:
-                  </p>
-                  <a
-                    href={selectedPdf.pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs font-sans shadow-md"
-                  >
-                    <ExternalLink size={16} /> Open PDF in New Tab
-                  </a>
-                </div>
-              </object>
+            {/* Modal Viewer Body */}
+            <div className="flex-1 w-full bg-slate-100 relative min-h-[400px] md:min-h-[550px] overflow-hidden flex items-center justify-center">
+              {selectedItem.fileType === 'pdf' ? (
+                <object
+                  data={selectedItem.fileSource}
+                  type="application/pdf"
+                  className="w-full h-full min-h-[400px] md:min-h-[550px]"
+                >
+                  <div className="flex flex-col items-center justify-center h-full p-8 text-center space-y-4">
+                    <p className="text-sm text-secondary-dark font-sans">
+                      Your browser does not support inline PDF viewing. You can view or download the certificate below:
+                    </p>
+                    <a
+                      href={selectedItem.fileSource}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-full font-bold text-xs font-sans shadow-md"
+                    >
+                      <ExternalLink size={16} /> Open PDF in New Tab
+                    </a>
+                  </div>
+                </object>
+              ) : (
+                <img
+                  src={selectedItem.fileSource}
+                  alt={selectedItem.title}
+                  className="max-h-full max-w-full object-contain"
+                />
+              )}
             </div>
           </div>
         </div>

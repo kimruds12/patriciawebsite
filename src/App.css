@@ -1,1 +1,39 @@
-/* Cleared to avoid conflicts with index.css */
+/* Page transition and animated background styles */
+.main-background {
+  background-image:
+    radial-gradient(circle at top left, rgba(226, 147, 129, 0.15), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(232, 195, 162, 0.14), transparent 24%),
+    linear-gradient(180deg, #FEF8F4 0%, #FBEEE5 45%, #F6E4D9 100%);
+  background-size: 180% 180%, 180% 180%, 100% 100%;
+  background-attachment: fixed;
+  animation: page-gradient 18s ease infinite;
+}
+
+@keyframes page-gradient {
+  0%, 100% { background-position: 15% 15%, 85% 85%, 50% 50%; }
+  50% { background-position: 86% 24%, 16% 74%, 50% 50%; }
+}
+
+.menu-open .arrow-top-button {
+  display: none !important;
+}
+
+.scroll-section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.55s ease-out forwards;
+}

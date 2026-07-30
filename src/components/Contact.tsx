@@ -57,7 +57,7 @@ export const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col justify-between pt-28 px-6 md:px-12 lg:px-24 bg-white"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col justify-between pt-28 px-6 md:px-12 lg:px-24 bg-transparent"
     >
       {/* Contact Content Area */}
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center flex-1 my-auto py-6">
@@ -76,10 +76,10 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Details Row */}
-          <div className="space-y-3.5 w-full">
+          <div className="space-y-3.5 w-full bg-white border border-gray-200 rounded-3xl p-5 shadow-sm">
             {/* Email */}
             <div className="flex items-center gap-4">
-              <div className="p-2.5 bg-bgGradientEnd rounded-full border border-gray-100 text-primary">
+              <div className="p-2.5 bg-primary/10 rounded-full border border-primary/20 text-primary">
                 <Mail size={16} />
               </div>
               <div className="text-left font-sans">
@@ -92,28 +92,28 @@ export const Contact: React.FC = () => {
                 </a>
               </div>
             </div>
-          </div>
 
-          {/* Social Icons row */}
-          <div className="flex items-center gap-3 pt-1">
-            <a
-              href="https://ph.linkedin.com/in/patricia-miguel-500896425"
-              target="_blank"
-              rel="noreferrer"
-              className="p-2.5 bg-bgGradientEnd hover:bg-primary hover:text-white border border-gray-100 text-secondary-dark rounded-full transition-all duration-300 hover:scale-110 hover:ring-4 hover:ring-primary/20 focus:ring-4 focus:ring-primary/30 cursor-pointer"
-              title="LinkedIn"
-            >
-              <Linkedin size={16} />
-            </a>
-            <a
-              href="https://www.facebook.com/patriciaarlie.miguel.5?mibextid=wwXIfr&rdid=U3moFTMpxYfcjafm&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1Juw7LrJF7%2F%3Fmibextid%3DwwXIfr"
-              target="_blank"
-              rel="noreferrer"
-              className="p-2.5 bg-bgGradientEnd hover:bg-primary hover:text-white border border-gray-100 text-secondary-dark rounded-full transition-all duration-300 hover:scale-110 hover:ring-4 hover:ring-primary/20 focus:ring-4 focus:ring-primary/30 cursor-pointer"
-              title="Facebook"
-            >
-              <Facebook size={16} />
-            </a>
+            {/* Social Icons row */}
+            <div className="flex items-center gap-3 pt-1">
+              <a
+                href="https://ph.linkedin.com/in/patricia-miguel-500896425"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 bg-white hover:bg-primary hover:text-white border border-gray-200 text-secondary-dark rounded-full transition-all duration-300 hover:scale-110 hover:ring-4 hover:ring-primary/20 focus:ring-4 focus:ring-primary/30 cursor-pointer"
+                title="LinkedIn"
+              >
+                <Linkedin size={16} />
+              </a>
+              <a
+                href="https://www.facebook.com/patriciaarlie.miguel.5?mibextid=wwXIfr&rdid=U3moFTMpxYfcjafm&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1Juw7LrJF7%2F%3Fmibextid%3DwwXIfr"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2.5 bg-white hover:bg-primary hover:text-white border border-gray-200 text-secondary-dark rounded-full transition-all duration-300 hover:scale-110 hover:ring-4 hover:ring-primary/20 focus:ring-4 focus:ring-primary/30 cursor-pointer"
+                title="Facebook"
+              >
+                <Facebook size={16} />
+              </a>
+            </div>
           </div>
         </div>
 

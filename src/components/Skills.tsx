@@ -42,7 +42,7 @@ export const Skills: React.FC = () => {
   return (
     <section
       id="skills"
-      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col items-center justify-start pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-gradient-to-tr from-bgGradientStart to-bgGradientEnd"
+      className="scroll-section scroll-mt-20 w-full min-h-dvh flex flex-col items-center justify-start pt-28 pb-16 px-6 md:px-12 lg:px-24 bg-transparent"
     >
 
       <div className="max-w-7xl w-full flex flex-col items-center h-full relative my-auto">

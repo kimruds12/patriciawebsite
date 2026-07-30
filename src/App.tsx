@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import './App.css';
 import { Header } from './components/Header';
 import { Home } from './components/Home';
 import { About } from './components/About';
@@ -68,15 +69,38 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      {
+        root: container,
+        rootMargin: '0px 0px -12% 0px',
+        threshold: 0.12,
+      }
+    );
+
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.scroll-section'));
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="relative w-full min-h-screen lg:h-screen lg:overflow-hidden bg-bgLight">
       {/* Fixed top Navbar Header */}
-      <Header activeSection={activeSection} scrollToSection={scrollToSection} />
+      <Header activeSection={activeSection} setActiveSection={setActiveSection} scrollToSection={scrollToSection} />
       
       {/* Scroll Snapping Container */}
       <div 
         ref={containerRef} 
-        className="scroll-container w-full h-full"
+        className="scroll-container w-full h-full main-background"
       >
         <Home scrollToSection={scrollToSection} />
         <About />
@@ -90,7 +114,7 @@ function App() {
       {/* Floating Interactive Scroll-To-Top Pop-up Button */}
       <button
         onClick={() => scrollToSection('home')}
-        className={`fixed bottom-8 right-8 z-50 p-3.5 rounded-full bg-primary hover:bg-primary-dark text-white shadow-premium border border-white/20 transition-all duration-500 ease-out transform hover:scale-110 active:scale-95 cursor-pointer ${
+        className={`arrow-top-button fixed bottom-8 right-8 z-50 p-3.5 rounded-full bg-primary hover:bg-primary-dark text-white shadow-premium border border-white/20 transition-all duration-500 ease-out transform hover:scale-110 active:scale-95 cursor-pointer ${
           showScrollTop ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-12 scale-0 opacity-0 pointer-events-none'
         }`}
         title="Scroll to Top"
