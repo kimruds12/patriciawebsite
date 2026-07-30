@@ -64,6 +64,11 @@ html, body {
   }
 }
 
+/* Ensure anchors and direct hash links are offset from the fixed header on all viewports */
+.scroll-section {
+  scroll-margin-top: 5rem; /* matches header height */
+}
+
 
 /* Mobile & Tablet viewports (under 1024px): Standard scroll flow, no snapping */
 @media (max-width: 1023px) {

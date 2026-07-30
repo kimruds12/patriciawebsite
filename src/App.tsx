@@ -84,6 +84,23 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
+  // Handle direct hash navigation (deployed links like /#contact) so content isn't hidden behind the fixed header
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#')) {
+        const id = hash.replace('#', '');
+        // small timeout to allow layout and images to settle
+        setTimeout(() => scrollToSection(id), 60);
+      }
+    };
+
+    // Call on mount in case the URL already has a hash
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
   useEffect(() => {
     const container = containerRef.current;
     const observer = new IntersectionObserver(
