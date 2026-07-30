@@ -90,12 +90,16 @@ function App() {
   useEffect(() => {
     const scrollToIdWhenReady = (id: string) => {
       let attempts = 0;
-      const maxAttempts = 30; // ~3 seconds at 100ms interval
+      const maxAttempts = 40; // ~4 seconds at 100ms interval
 
       const tryScroll = () => {
         const el = document.getElementById(id);
         if (el) {
           scrollToSection(id);
+          try {
+            // restore hash without jumping
+            history.replaceState(null, '', window.location.pathname + window.location.search + '#' + id);
+          } catch {}
           return;
         }
         attempts += 1;
@@ -104,7 +108,6 @@ function App() {
         }
       };
 
-      // Start after next paint to allow layout to settle
       requestAnimationFrame(tryScroll);
     };
 
@@ -112,6 +115,12 @@ function App() {
       const hash = window.location.hash;
       if (hash && hash.startsWith('#')) {
         const id = hash.replace('#', '');
+
+        // Prevent browser's automatic anchor scrolling which may occur before React mounts.
+        try {
+          history.replaceState(null, '', window.location.pathname + window.location.search);
+        } catch {}
+
         scrollToIdWhenReady(id);
       }
     };
