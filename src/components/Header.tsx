@@ -108,7 +108,6 @@ export const Header: React.FC<HeaderProps> = ({ activeSection, setActiveSection,
             <div>
               <div className="flex items-center justify-between pb-4">
                 <span className="text-xs font-extrabold tracking-[0.2em] text-primary uppercase font-sans">
-                  NAVIGATION
                 </span>
                 <button
                   onClick={() => setIsOpen(false)}

@@ -16,9 +16,24 @@ function App() {
   // Scroll to section handler
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (!element) return;
+
+    // Account for fixed header height so target section is visible on mobile
+    const header = document.querySelector('header');
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+    // If using custom scroll container (desktop), scroll that container.
+    const container = containerRef.current;
+    if (container && window.innerWidth >= 1024) {
+      const top = (element as HTMLElement).offsetTop - headerHeight;
+      container.scrollTo({ top, behavior: 'smooth' });
+      return;
     }
+
+    // For window scrolling (mobile), compute absolute position minus header
+    const rect = element.getBoundingClientRect();
+    const absoluteTop = rect.top + window.pageYOffset - headerHeight - 8; // small extra offset
+    window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
   };
 
   useEffect(() => {
