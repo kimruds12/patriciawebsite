@@ -84,18 +84,39 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  // Handle direct hash navigation (deployed links like /#contact) so content isn't hidden behind the fixed header
+  // Handle direct hash navigation (deployed links like /#contact).
+  // Some hosting environments or slow image/layout loads can trigger the
+  // hash before the target element exists — retry until present.
   useEffect(() => {
+    const scrollToIdWhenReady = (id: string) => {
+      let attempts = 0;
+      const maxAttempts = 30; // ~3 seconds at 100ms interval
+
+      const tryScroll = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          scrollToSection(id);
+          return;
+        }
+        attempts += 1;
+        if (attempts <= maxAttempts) {
+          setTimeout(tryScroll, 100);
+        }
+      };
+
+      // Start after next paint to allow layout to settle
+      requestAnimationFrame(tryScroll);
+    };
+
     const handleHash = () => {
       const hash = window.location.hash;
       if (hash && hash.startsWith('#')) {
         const id = hash.replace('#', '');
-        // small timeout to allow layout and images to settle
-        setTimeout(() => scrollToSection(id), 60);
+        scrollToIdWhenReady(id);
       }
     };
 
-    // Call on mount in case the URL already has a hash
+    // Run once on mount in case page was opened with a hash
     handleHash();
     window.addEventListener('hashchange', handleHash);
     return () => window.removeEventListener('hashchange', handleHash);
