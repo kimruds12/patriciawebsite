@@ -132,7 +132,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const container = containerRef.current;
+    const isDesktop = window.innerWidth >= 1024;
+    const observerRoot = isDesktop ? containerRef.current : null;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -142,7 +143,7 @@ function App() {
         });
       },
       {
-        root: container,
+        root: observerRoot,
         rootMargin: '0px 0px -12% 0px',
         threshold: 0.12,
       }
@@ -151,7 +152,19 @@ function App() {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('.scroll-section'));
     sections.forEach((section) => observer.observe(section));
 
-    return () => observer.disconnect();
+    // Mobile safety fallback: force-show all sections after a short delay
+    // in case IntersectionObserver doesn't fire (e.g., some in-app browsers)
+    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
+    if (!isDesktop) {
+      fallbackTimer = setTimeout(() => {
+        sections.forEach((section) => section.classList.add('is-visible'));
+      }, 1200);
+    }
+
+    return () => {
+      observer.disconnect();
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+    };
   }, []);
 
   return (
